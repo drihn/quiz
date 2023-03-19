@@ -1,0 +1,130 @@
+package jaaswing;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class tutionfeecomputation extends JFrame implements ActionListener {
+    // GUI components
+    private JLabel idLabel, nameLabel, courseLabel, tuitionLabel, miscLabel, discountLabel;
+    private JTextField idField, nameField;
+    private JComboBox<String> courseComboBox, discountComboBox;
+    private JButton enrollButton;
+    private JTextArea outputArea;
+    
+    // Course data
+    private static final String[] COURSES = {"Nursing", "Computer Science", "Engineer", "Tourism", "Architecture"};
+    private static final int[] TUITION_FEES = {15000, 20000, 30000, 10000, 25000};
+    private static final int[] MISC_FEES = {15000, 11000, 25000, 22500, 23000};
+    
+    // Discount data
+    private static final String[] DISCOUNTS = {"Walk-in", "Gold", "Blue", "White", "Continuing"};
+    private static final double[] MISC_DISCOUNTS = {0.0, 0.005, 0.007, 0.009, 0.1};
+    private static final double TUITION_DISCOUNT = 1;
+
+    public tutionfeecomputation() {
+        super("Enrollment System");
+
+        // Create GUI components
+        idLabel = new JLabel("ID Number:");
+        nameLabel = new JLabel("Name:");
+        courseLabel = new JLabel("Course:");
+        tuitionLabel = new JLabel("Tuition Fee:");
+        miscLabel = new JLabel("Miscellaneous Fee:");
+        discountLabel = new JLabel("Discount:");
+        idField = new JTextField(10);
+        nameField = new JTextField(20);
+        courseComboBox = new JComboBox<>(COURSES);
+        discountComboBox = new JComboBox<>(DISCOUNTS);
+        enrollButton = new JButton("Enroll");
+        outputArea = new JTextArea(10, 40);
+
+        // Set layout
+        setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = 0;
+        c.anchor = GridBagConstraints.WEST;
+        add(idLabel, c);
+        c.gridx = 1;
+        add(idField, c);
+        c.gridx = 0;
+        c.gridy = 1;
+        add(nameLabel, c);
+        c.gridx = 1;
+        add(nameField, c);
+        c.gridx = 0;
+        c.gridy = 2;
+        add(courseLabel, c);
+        c.gridx = 1;
+        add(courseComboBox, c);
+        c.gridx = 0;
+        c.gridy = 3;
+        add(tuitionLabel, c);
+        c.gridx = 1;
+        add(new JLabel(), c);
+        c.gridx = 2;
+        add(miscLabel, c);
+        c.gridx = 3;
+        add(new JLabel(), c);
+        c.gridx = 0;
+        c.gridy = 4;
+        add(new JLabel(), c);
+        c.gridx = 1;
+        add(new JLabel(), c);
+        c.gridx = 2;
+        add(discountLabel, c);
+        c.gridx = 3;
+        add(discountComboBox, c);
+        c.gridx = 0;
+        c.gridy = 5;
+        add(new JLabel(), c);
+        c.gridx = 1;
+        add(new JLabel(), c);
+        c.gridx = 2;
+        add(new JLabel(), c);
+        c.gridx = 3;
+        add(enrollButton, c);
+        c.gridx = 0;    c.gridy = 6;
+        c.gridwidth = 4;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        add(outputArea, c);
+
+        // Add action listeners
+        enrollButton.addActionListener(this);
+
+        // Set frame properties
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(500, 400);
+        setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // Get input values
+        String id = idField.getText();
+        String name = nameField.getText();
+        String course = (String) courseComboBox.getSelectedItem();
+        double tuitionFee = TUITION_FEES[courseComboBox.getSelectedIndex()] * (discountComboBox.getSelectedIndex() == 4 ? TUITION_DISCOUNT : 1);
+        double miscFee = MISC_FEES[courseComboBox.getSelectedIndex()] * (1 - MISC_DISCOUNTS[discountComboBox.getSelectedIndex()]);
+
+        // Compute total fee
+        double totalFee = tuitionFee + miscFee;
+
+        // Build output string
+        StringBuilder output = new StringBuilder();
+        output.append("ID Number: ").append(id).append("\n");
+        output.append("Name: ").append(name).append("\n");
+        output.append("Course: ").append(course).append("\n");
+        output.append("Tuition Fee: ").append(String.format("%.2f", tuitionFee)).append("\n");
+        output.append("Miscellaneous Fee: ").append(String.format("%.2f", miscFee)).append("\n");
+        output.append("Total Fee: ").append(String.format("%.2f", totalFee)).append("\n");
+
+        // Display output
+        outputArea.setText(output.toString());
+    }
+
+    public static void main(String[] args) {
+        new tutionfeecomputation();
+    }
+}
