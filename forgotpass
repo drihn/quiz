@@ -1,0 +1,103 @@
+package jaaswing;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JPasswordField;
+import java.awt.SystemColor;
+import java.awt.Color;
+import javax.swing.JScrollBar;
+import javax.swing.JList;
+import javax.swing.JToggleButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
+
+
+public class forgotpassword extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textEmail;
+	private JTextField textUsername;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					forgotpassword frame = new forgotpassword();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public forgotpassword() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 313, 277);
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("FORGOT PASSWORD");
+		lblNewLabel.setForeground(Color.BLACK);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 26));
+		lblNewLabel.setBounds(10, 11, 277, 46);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblinusername = new JLabel("Enter Username");
+		lblinusername.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblinusername.setBounds(21, 68, 119, 14);
+		contentPane.add(lblinusername);
+		
+		textEmail = new JTextField();
+		textEmail.setBounds(21, 93, 173, 20);
+		contentPane.add(textEmail);
+		textEmail.setColumns(10);
+		
+		JLabel lblUsername = new JLabel("Enter Email");
+		lblUsername.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblUsername.setBounds(21, 124, 119, 14);
+		contentPane.add(lblUsername);
+		
+		textUsername = new JTextField();
+		textUsername.setColumns(10);
+		textUsername.setBounds(21, 149, 173, 20);
+		contentPane.add(textUsername);
+		
+		JToggleButton tglbtnNewToggleButton = new JToggleButton("Send code");
+		tglbtnNewToggleButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		tglbtnNewToggleButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+		
+				
+				newpassword frame = new newpassword();
+				frame.setVisible(true);
+				dispose();
+			}
+		});
+		tglbtnNewToggleButton.setBounds(151, 195, 136, 23);
+		contentPane.add(tglbtnNewToggleButton);
+	}
+}
