@@ -1,0 +1,101 @@
+package jaaswing;
+
+import java.awt.EventQueue;
+import javax.swing.JOptionPane;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JPasswordField;
+import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class newpassword extends JFrame {
+
+	private JPanel contentPane;
+	private JPasswordField passwordField;
+	private JPasswordField passwordField_1;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					newpassword frame = new newpassword();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public newpassword() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 248, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Create New Password");
+		lblNewLabel.setBounds(28, 11, 178, 20);
+		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("New Password");
+		lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		lblNewLabel_1.setBounds(21, 61, 101, 14);
+		contentPane.add(lblNewLabel_1);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(21, 86, 134, 20);
+		contentPane.add(passwordField);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("Confirm Password");
+		lblNewLabel_1_1.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		lblNewLabel_1_1.setBounds(21, 125, 152, 14);
+		contentPane.add(lblNewLabel_1_1);
+		
+		passwordField_1 = new JPasswordField();
+		passwordField_1.setBounds(21, 150, 134, 20);
+		contentPane.add(passwordField_1);
+		
+		JButton btnNewButton = new JButton("OK");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				String password = passwordField.getText();
+				String password1 = passwordField_1.getText();
+				
+				if (password1.contains(password)){
+					
+					passwordField.setText(null);
+					passwordField.setText(null);
+					newpassword f = new newpassword();
+					JOptionPane.showMessageDialog(null,"New password has been created, you can now login to your account");
+					dispose();
+				}
+				else {
+					JOptionPane.showMessageDialog(null,"Password does not match");
+					passwordField.setText(null);
+					passwordField.setText(null);
+				}
+			
+			}
+		});
+		btnNewButton.setBounds(120, 194, 89, 23);
+		contentPane.add(btnNewButton);
+	}
+
+}
