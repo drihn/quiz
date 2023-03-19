@@ -1,0 +1,157 @@
+package jaaswing;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.Color;
+import javax.swing.JPasswordField;
+import javax.swing.JToggleButton;
+import javax.swing.JOptionPane;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.FileWriter;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class signup extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField;
+	private JTextField textUsername;
+	private JPasswordField passwordField;
+	private JPasswordField passwordField_1;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					signup frame = new signup();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public signup() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 246, 416);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JPanel contentPane_1 = new JPanel();
+		contentPane_1.setLayout(null);
+		contentPane_1.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane_1.setBackground(Color.GRAY);
+		contentPane_1.setBounds(0, 0, 237, 383);
+		contentPane.add(contentPane_1);
+		
+		JLabel lblcreateacc = new JLabel("Create Account");
+		lblcreateacc.setFont(new Font("Trebuchet MS", Font.BOLD, 27));
+		lblcreateacc.setBounds(21, 11, 218, 46);
+		contentPane_1.add(lblcreateacc);
+		
+		JLabel lblEmail = new JLabel("EMAIL");
+		lblEmail.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblEmail.setBounds(21, 68, 66, 14);
+		contentPane_1.add(lblEmail);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(21, 93, 173, 20);
+		contentPane_1.add(textField);
+		
+		JLabel lblUsername = new JLabel("USERNAME");
+		lblUsername.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblUsername.setBounds(21, 124, 119, 14);
+		contentPane_1.add(lblUsername);
+		
+		textUsername = new JTextField();
+		textUsername.setColumns(10);
+		textUsername.setBounds(21, 149, 173, 20);
+		contentPane_1.add(textUsername);
+		
+		JLabel lblPassword = new JLabel("PASSWORD");
+		lblPassword.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblPassword.setBounds(21, 180, 89, 14);
+		contentPane_1.add(lblPassword);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(21, 205, 173, 20);
+		contentPane_1.add(passwordField);
+		
+		JLabel lblconfirmPassword = new JLabel("CONFIRM PASSWORD");
+		lblconfirmPassword.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblconfirmPassword.setBounds(21, 236, 173, 14);
+		contentPane_1.add(lblconfirmPassword);
+		
+		passwordField_1 = new JPasswordField();
+		passwordField_1.setBounds(21, 261, 173, 20);
+		contentPane_1.add(passwordField_1);
+		
+		JToggleButton tglbtnNewToggleButton = new JToggleButton("Create Account");
+		tglbtnNewToggleButton.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent e) {
+				
+				String password = passwordField.getText();
+				String password1 = passwordField_1.getText();
+				
+				if (password1.contains(password)){
+					
+		
+					
+					try {
+						FileWriter fw = new FileWriter("C:\\Users\\USER\\Downloads\\a.txt",true);
+						
+						
+						fw.write(textUsername.getText()+"\t"+passwordField.getText()+"\t"+"\n");
+						passwordField.setText(null);
+						
+						fw.close();
+						
+						}
+						catch(Exception e1){
+							
+						}
+					BorderLayout f = new BorderLayout();
+					JOptionPane.showMessageDialog(f,"Account signed up, you can now log in your account");
+					dispose();
+					
+					BorderLayout frame = new BorderLayout();
+					frame.setVisible(true);
+
+				}
+				else {
+					JOptionPane.showMessageDialog(null,"Password does not match");
+					passwordField.setText(null);
+					passwordField.setText(null);
+					
+				}
+				 
+				
+				
+			}
+		});
+	
+		tglbtnNewToggleButton.setBounds(37, 306, 136, 23);
+		contentPane_1.add(tglbtnNewToggleButton);
+		
+	}
+}
